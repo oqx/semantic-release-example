@@ -11,7 +11,7 @@ function App() {
         </p>
       </header>
       <div>
-        Foo
+        Bar
       </div>
     </div>
   );
