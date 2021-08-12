@@ -14,7 +14,6 @@ module.exports = {
             writerOpts: {
                 commitsSort: ["subject", "scope"],
                 transform: (str) => {
-                    
                     if(/^ch: [0-9]/i.test(str) || /^ch:[0-9]/i.test(str)) {
                         try {
                             const id = str.split(':').slice(-1)[0].trim()
