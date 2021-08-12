@@ -10,7 +10,6 @@ module.exports = {
             preset: "angular",
             parserOpts: {
                 noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING", "Clubhouse"],
-                notesPattern: (note) => /^ch[0-9]/i.test(note)
             },
             writerOpts: {
                 commitsSort: ["subject", "scope"],
