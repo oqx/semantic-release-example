@@ -9,19 +9,30 @@ module.exports = {
         ["@semantic-release/release-notes-generator", {
             preset: "angular",
             parserOpts: {
-                "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"]
+                "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"],
+                notesPattern: (note) => /^ch[0-9]/i.test(note)
             },
             writerOpts: {
                 commitsSort: ["subject", "scope"],
                 transform: (commit) => {
-                    if(commit.footer && commit.footer.startsWith('[') && commit.footer.endsWith(']')) {
-                        commit.footer = commit.footer.replace('[', '').replace(']', '').replace(/ch/i, '')
-                    } else if(commit.footer && commit.footer.startsWith('ch')) {
-                        commit.footer = commit.footer.replace(/ch/i, '')
-                    }
+                    const notes = commit?.notes?.map(note => {
+                        let id = note?.title
+                        if(id && /^ch[0-9]/i.test(id)) {
+                            if(id.startsWith('[') && id.endsWith(']')) {
+                                id = id.replace('[', '').replace(']', '').replace(/ch/i, '')
+                            } else if(id && id.startsWith('ch')) {
+                                id = id.replace(/ch/i, '')
+                            }
+                             return {
+                                 ...note,
+                                 title: `[Clubhouse ${id}](https://app.clubhouse.io/curbee/story/${id})`
+                             }
+                        }
+                        return note
+                    })
                     return {
                         ...commit,
-                        footer: commit.footer ? `[${commit.footer}](https://app.clubhouse.io/curbee/story/${commit.footer})` : null
+                        notes
                     }
                 }
             }
