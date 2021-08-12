@@ -16,12 +16,12 @@ module.exports = {
                 transform: (commit) => {
                     if(commit.footer && commit.footer.startsWith('[') && commit.footer.endsWith(']')) {
                         commit.footer = commit.footer.replace('[', '').replace(']', '').replace(/ch/i, '')
-                    } else if(commit.footer.startsWith('ch')) {
+                    } else if(commit.footer && commit.footer.startsWith('ch')) {
                         commit.footer = commit.footer.replace(/ch/i, '')
                     }
                     return {
                         ...commit,
-                        footer: `[${commit.footer}](https://app.clubhouse.io/curbee/story/${commit.footer})`
+                        footer: commit.footer ? `[${commit.footer}](https://app.clubhouse.io/curbee/story/${commit.footer})` : null
                     }
                 }
             }
