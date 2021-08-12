@@ -11,7 +11,7 @@ function App() {
         </p>
       </header>
       <div>
-        Bar
+        Bar Fuzz
       </div>
       <footer>
         copyright 2021
