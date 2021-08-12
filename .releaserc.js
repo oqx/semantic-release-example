@@ -3,20 +3,17 @@ module.exports = {
         ["@semantic-release/commit-analyzer", {
             preset: "angular",
             parserOpts: {
-                noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"]
+                noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING", "CH"]
             }
         }],
         ["@semantic-release/release-notes-generator", {
             preset: "angular",
             parserOpts: {
-                noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING", "Clubhouse"],
+                noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING", "CH"],
             },
             writerOpts: {
                 commitsSort: ["subject", "scope"],
-                transform: (str) => {
-                    if(/^ch[0-9]/i.test(str)) return `Clubhouse: [${str}](https://app.clubhouse.io/curbee/story/${str})`
-                    return str
-                }
+                transform: (_, context) => {console.log(context)}
             }
         }],
         ["@semantic-release/npm", {
