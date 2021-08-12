@@ -13,6 +13,9 @@ function App() {
       <div>
         Bar
       </div>
+      <footer>
+        copyright 2021
+      </footer>
     </div>
   );
 }
