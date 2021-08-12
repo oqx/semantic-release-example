@@ -10,6 +10,9 @@ function App() {
           Hello world!
         </p>
       </header>
+      <div>
+        Foo
+      </div>
     </div>
   );
 }
