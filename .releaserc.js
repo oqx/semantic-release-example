@@ -9,31 +9,12 @@ module.exports = {
         ["@semantic-release/release-notes-generator", {
             preset: "angular",
             parserOpts: {
-                "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"],
-                notesPattern: (note) => /^ch[0-9]/i.test(note)
+                noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"],
             },
             writerOpts: {
                 commitsSort: ["subject", "scope"],
                 transform: (commit) => {
-                    const notes = commit?.notes?.map(note => {
-                        let id = note?.title
-                        if(id && /^ch[0-9]/i.test(id)) {
-                            if(id.startsWith('[') && id.endsWith(']')) {
-                                id = id.replace('[', '').replace(']', '').replace(/ch/i, '')
-                            } else if(id && id.startsWith('ch')) {
-                                id = id.replace(/ch/i, '')
-                            }
-                             return {
-                                 ...note,
-                                 title: `[Clubhouse ${id}](https://app.clubhouse.io/curbee/story/${id})`
-                             }
-                        }
-                        return note
-                    })
-                    return {
-                        ...commit,
-                        notes
-                    }
+                    console.log(commit)
                 }
             }
         }],
